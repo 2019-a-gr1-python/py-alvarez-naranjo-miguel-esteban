@@ -1,4 +1,5 @@
 1,miguel,valle,123,456
-2,valeria,norte,345,456
-4,maria,centro,45645,456456
+2,VALERIA,BETZA,234234,23424
+4,MARIA,centro,234234,234234
 6,fer,asdf,345,345
+3,JUAN,norte,1234567890,1717570301

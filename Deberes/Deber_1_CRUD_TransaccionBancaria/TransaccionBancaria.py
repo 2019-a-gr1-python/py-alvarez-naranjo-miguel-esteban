@@ -82,6 +82,27 @@ def borrarUsuario(identificador):
     limpiarArchivo()
     llenarArchivo(listaUsuarios)
     
+def actualizarUsuario(indice, nuevoDato):
+    listaUsuarios = []
+    elementoAActualizar = -1
+    try:   
+      archivo_escritura_abierto = open(path,mode='r')
+      for lines in archivo_escritura_abierto:
+        listaUsuarios.append(lines)
+      archivo_escritura_abierto.close()
+      
+    except:
+      print('Error leyendo archivo')
+
+    for x in listaUsuarios:
+      y = x.split(',')
+      if y[0] == indice:
+        elementoAActualizar = int(listaUsuarios.index(x))        
+        listaUsuarios[elementoAActualizar] = nuevoDato+'\n'
+
+
+    limpiarArchivo()
+    llenarArchivo(listaUsuarios)    
 
 def limpiarArchivo():
     try:   
@@ -154,6 +175,14 @@ while True:
       idABuscarBorrar = input('Ingrese el ID: ')
       print('\n')
       borrarUsuario(idABuscarBorrar)
+      print('\n')
+    elif opcionMenu=='6':
+      print ('\nActualizar Usuario')
+      idActualizar = input('Ingrese el ID del usuario que requiera actualizar: ')
+      print ('\nlos datos deben estar separados por comas: id,nombre,direccion,numero de telefono,cedula')
+      nuevoDatoUsuario = input('Ingrese los nuevos datos del usuario a actualizar: ')
+      print('\n')
+      actualizarUsuario(idActualizar,nuevoDatoUsuario)
       print('\n')
     elif opcionMenu=='9':
       break
