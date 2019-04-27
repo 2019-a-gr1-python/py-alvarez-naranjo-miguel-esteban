@@ -1,8 +1,9 @@
 import os
 
 path = './BDusuario.txt'
+pathCuenta = './BDCuenta.txt'
 
-def crearUsuario(datosUsuario):
+def crearUsuario(datosUsuario, datoCuenta):
         
     
     try:            
@@ -11,15 +12,35 @@ def crearUsuario(datosUsuario):
       archivo_escritura_abierto.writelines(datosUsuario + '\n') # Sobre escribe el contenido
       archivo_escritura_abierto.close()
       print('\n\nUSUARIO CREADO CON EXITO\n')
+
+      archivo_escritura_abierto = open(pathCuenta,mode='a')
+      archivo_escritura_abierto.writelines(datoCuenta + '\n') # Sobre escribe el contenido
+      archivo_escritura_abierto.close()
+      print('\n\nCUENTA CREADA CON EXITO\n')
+
     except:
       print('Error leyendo archivo')
 
 def verListaUsuarios():
-         
+       
     try:   
       archivo_escritura_abierto = open(path,mode='r')
       for lines in archivo_escritura_abierto:
         print(lines)
+      archivo_escritura_abierto.close()
+      
+    except:
+      print('Error leyendo archivo')
+
+def verListaCuentasDeUsuarios(idDeUsuario):
+    
+    usuarioBuscado = buscarUsuarioPorID(idDeUsuario)
+    try:   
+      archivo_escritura_abierto = open(pathCuenta,mode='r')
+      for lines in archivo_escritura_abierto:
+        x = lines.split(',')
+        if x[1] == usuarioBuscado[0]:
+          print(lines)
       archivo_escritura_abierto.close()
       
     except:
@@ -138,6 +159,7 @@ def menu():
     print ('\t4 - Buscar Usuario por Nombre')
     print ('\t5 - Borrar Usuario')
     print ('\t6 - Actualizar Usuario')
+    print ('\t7 - Mostrar cuentas de un usuario')
     print ('\t9 - salir')
 
 
@@ -153,7 +175,8 @@ while True:
     
       print ('\nlos datos deben estar separados por comas: id,nombre,direccion,numero de telefono,cedula')
       datosIngresados = input('Ingrese los datos de un nuevo usuario: ')
-      crearUsuario(str(datosIngresados))
+      datoCuenta = input('Ingresar la cuenta al usuario: idCuenta,idUsuario,TipoCuenta ')
+      crearUsuario(str(datosIngresados), str(datoCuenta))
         
     elif opcionMenu=='2':
       print('\n')
@@ -185,6 +208,13 @@ while True:
       print('\n')
       actualizarUsuario(idActualizar,nuevoDatoUsuario)
       print('\n')
+    elif opcionMenu=='7':
+      print('\n')
+      idDeUsuario = input('Ingrese el ID: ')
+      verListaCuentasDeUsuarios(idDeUsuario)
+      print('\n') 
+
+
     elif opcionMenu=='9':
       break
     else:
