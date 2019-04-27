@@ -15,8 +15,7 @@ def crearUsuario(datosUsuario):
       print('Error leyendo archivo')
 
 def verListaUsuarios():
-     
-    
+         
     try:   
       archivo_escritura_abierto = open(path,mode='r')
       for lines in archivo_escritura_abierto:
@@ -103,6 +102,8 @@ def actualizarUsuario(indice, nuevoDato):
 
     limpiarArchivo()
     llenarArchivo(listaUsuarios)    
+
+    print('\n\nUSUARIO ACTUALIZADO\n')
 
 def limpiarArchivo():
     try:   
