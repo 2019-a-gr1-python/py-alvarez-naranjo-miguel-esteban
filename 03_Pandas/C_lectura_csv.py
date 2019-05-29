@@ -9,45 +9,38 @@ import pandas as pd
 import os
 
 # Archivos texto -> JSON, CSV, HTML, XML....
-# Binary Files -> (asdasdadasdasdasd)
+# Binary Files -> (asasadasadasasa)
 # Relational Databases
 
-
-path = '/Users/usrdel/Documents/GitHub/py-eguez-sarzosa-vicente-adrian/03_Pandas/data/csv/artwork_data.csv'
+path = '/Users/carlosaguirre/Documents/GitHub/py-Aguirre-Maldonado-Carlos-Arturo/03_Pandas/data/csv/artwork_data.csv'
 
 df = pd.read_csv(
         path,
-        nrows=100,
+        nrows = 5,
         usecols=['id','artist'],
-        index_col='id'
+        index_cols='id'
         )
 
-columnas_a_usar = ['id','artist','title',
+columnas_a_usar = ['id', 'artist','title',
                    'medium','year','acquisitionYear',
-                   'height','width','units']
+                   'height','width','units'
+                   ]
+
+
 
 df_completo = pd.read_csv(
         path,
         usecols=columnas_a_usar,
-        index_col='id'
+        index_col = 'id'
         )
 
-
-path_guardado = '/Users/usrdel/Documents/GitHub/py-eguez-sarzosa-vicente-adrian/03_Pandas/data/csv/artwork_data.pickle'
+path_guardado = '/Users/carlosaguirre/Documents/GitHub/py-Aguirre-Maldonado-Carlos-Arturo/03_Pandas/data/csv/artwork_data.pickle'
 
 df_completo.to_pickle(path_guardado)
 
-df_completo_pickle = pd.read_pickle(path_guardado)
+df_completo_pickel = pd.read_pickle(path_guardado)
 
-
-
-
-
-
-
-
-
-
+df_completo.shape
 
 
 
