@@ -171,7 +171,7 @@ df_STATEN_ISLAND2016 = df_STATEN_ISLAND.loc[mask18]
 
 
 
-
+len(df_STATEN_ISLAND2019)
 
 
 seccion_df = df_QUEENS2019.copy()
@@ -191,6 +191,10 @@ df_cantidadOfensas.plot(kind='bar')#grafico de ofensas vs cantidad de ofensas
 arregloOfensas = df_cantidadOfensas['CMPLNT_NUM']
 
 
+df_QUEENS2019.groupby('SUSP_SEX')['SUSP_AGE_GROUP'].nunique().plot(kind='bar')
+plt.show()
+
+
 
 
 cantidad_genero = df_QUEENS2019.copy().groupby('SUSP_SEX')
@@ -199,8 +203,21 @@ df_cantidad_genero.plot(kind='bar', color='green')
 
 
 
+cantidad_raza = df.copy().groupby('SUSP_RACE')
+df_cantidadRaza = pd.DataFrame(cantidad_raza['SUSP_RACE'].count())
 
 
+df.groupby(['BORO_NM','SUSP_RACE']).size().unstack().plot(kind='bar',stacked=True)
+plt.show()
+
+
+# gca stands for 'get current axis'
+ax = plt.gca()
+
+df.plot(kind='line',x='name',y='num_children',ax=ax)
+df.plot(kind='line',x='name',y='num_pets', color='red', ax=ax)
+
+plt.show()
 
 
 df_QUEENS.count()
