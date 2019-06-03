@@ -192,7 +192,13 @@ arregloOfensas = df_cantidadOfensas['CMPLNT_NUM']
 
 
 
-genero = pd.unique(df_QUEENS2019['SUSP_SEX'])
+
+cantidad_genero = df_QUEENS2019.copy().groupby('SUSP_SEX')
+df_cantidad_genero = pd.DataFrame(cantidad_genero['SUSP_SEX'].count())
+df_cantidad_genero.plot(kind='bar', color='green')
+
+
+
 
 
 
