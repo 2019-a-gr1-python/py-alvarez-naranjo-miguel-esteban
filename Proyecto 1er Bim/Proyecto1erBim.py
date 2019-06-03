@@ -41,7 +41,7 @@ df_completo = pd.read_csv(
 
 
 
-df_completo.fillna(0)
+#df_completo.fillna(0)
 
 df_completo = df_completo[df_completo.CMPLNT_NUM != 418784447]
 df_completo = df_completo[df_completo.CMPLNT_NUM != 160867902]
@@ -65,6 +65,10 @@ path_guardado = 'C:/Users/MIGUELESTEBAN/Documents/GitHub/py-alvarez-naranjo-migu
 df_completo.to_pickle(path_guardado)
 
 
+df = pd.read_pickle(path_guardado)
+# tipar la fecha con tipo date
+df['CMPLNT_FR_DT'] = pd.to_datetime(df.CMPLNT_FR_DT)
+
 
 # graficar el mapa
 NY_street_map = gpd.read_file(path_mapa)
@@ -86,47 +90,115 @@ df_seccion_barrios = df_completo['BORO_NM']
 
 # filtrado por barrio y creacion de data frames
 
-QUEENS = df_completo['BORO_NM'] == 'QUEENS'
+QUEENS = df['BORO_NM'] == 'QUEENS'
 
-df_QUEENS = df_completo[QUEENS]
+df_QUEENS = df[QUEENS]
 
-BRONX = df_completo['BORO_NM'] == 'BRONX'
+BRONX = df['BORO_NM'] == 'BRONX'
 
-df_BRONX = df_completo[BRONX]
+df_BRONX = df[BRONX]
 
-MANHATTAN = df_completo['BORO_NM'] == 'MANHATTAN'
+MANHATTAN = df['BORO_NM'] == 'MANHATTAN'
 
-df_MANHATTAN = df_completo[MANHATTAN]
+df_MANHATTAN = df[MANHATTAN]
 
-BROOKLYN = df_completo['BORO_NM'] == 'BROOKLYN'
+BROOKLYN = df['BORO_NM'] == 'BROOKLYN'
 
-df_BROOKLYN = df_completo[BROOKLYN]
+df_BROOKLYN = df[BROOKLYN]
 
-STATEN_ISLAND = df_completo['BORO_NM'] == 'STATEN ISLAND'
+STATEN_ISLAND = df['BORO_NM'] == 'STATEN ISLAND'
 
-df_STATEN_ISLAND = df_completo[STATEN_ISLAND]
+df_STATEN_ISLAND = df[STATEN_ISLAND]
 
-# BarrioDesconocido = df_completo['BORO_NM'] == ''
+BarrioDesconocido = df['BORO_NM'] == ''
 
-# df_BarrioDesconocido = df_completo[BarrioDesconocido]
+df_BarrioDesconocido = df[BarrioDesconocido]
 
-df_completo.count()
+df.count()
 
-# cambiar a formato fecha
+# filtrar barrios por fechas desde 2016 hasta mediados de 2019
 
 
-
-df_QUEENS['CMPLNT_FR_DT'] = pd.to_datetime(df_QUEENS.CMPLNT_FR_DT)
-df_BRONX.dtypes
-
-df_QUEENS2019 = df_QUEENS.loc[df_QUEENS.CMPLNT_TO_DT >= '01/01/2019']
-mask1 = (df_QUEENS['CMPLNT_FR_DT'] > '12/31/2017') & (df_QUEENS['CMPLNT_FR_DT'] <= '12/31/2018')
+df_QUEENS2019 = df_QUEENS.loc[df_QUEENS.CMPLNT_FR_DT >= '2019-01-01']
+mask1 = (df_QUEENS['CMPLNT_FR_DT'] > '2017-12-31') & (df_QUEENS['CMPLNT_FR_DT'] <= '2018-12-31')
 df_QUEENS2018 = df_QUEENS.loc[mask1]
 
-mask2 = (df_QUEENS['CMPLNT_FR_DT'] > '12/31/2016') & (df_QUEENS['CMPLNT_FR_DT'] <= '12/31/2017')
+mask2 = (df_QUEENS['CMPLNT_FR_DT'] > '2016-12-31') & (df_QUEENS['CMPLNT_FR_DT'] <= '2017-12-31')
 df_QUEENS2017 = df_QUEENS.loc[mask2]
+
+mask3 = (df_QUEENS['CMPLNT_FR_DT'] > '2015-12-31') & (df_QUEENS['CMPLNT_FR_DT'] <= '2016-12-31')
+df_QUEENS2016 = df_QUEENS.loc[mask3]
+
+df_BRONX2019 = df_BRONX.loc[df_BRONX.CMPLNT_FR_DT >= '2019-01-01']
+mask4 = (df_BRONX['CMPLNT_FR_DT'] > '2017-12-31') & (df_BRONX['CMPLNT_FR_DT'] <= '2018-12-31')
+df_BRONX2018 = df_BRONX.loc[mask4]
+
+mask5 = (df_BRONX['CMPLNT_FR_DT'] > '2016-12-31') & (df_BRONX['CMPLNT_FR_DT'] <= '2017-12-31')
+df_BRONX2017 = df_BRONX.loc[mask5]
+
+mask6 = (df_BRONX['CMPLNT_FR_DT'] > '2015-12-31') & (df_BRONX['CMPLNT_FR_DT'] <= '2016-12-31')
+df_BRONX2016 = df_BRONX.loc[mask6]
+
+df_MANHATTAN2019 = df_MANHATTAN.loc[df_MANHATTAN.CMPLNT_FR_DT >= '2019-01-01']
+mask7 = (df_MANHATTAN['CMPLNT_FR_DT'] > '2017-12-31') & (df_MANHATTAN['CMPLNT_FR_DT'] <= '2018-12-31')
+df_MANHATTAN2018 = df_MANHATTAN.loc[mask7]
+
+mask8 = (df_MANHATTAN['CMPLNT_FR_DT'] > '2016-12-31') & (df_MANHATTAN['CMPLNT_FR_DT'] <= '2017-12-31')
+df_MANHATTAN2017 = df_MANHATTAN.loc[mask8]
+
+mask9 = (df_MANHATTAN['CMPLNT_FR_DT'] > '2015-12-31') & (df_MANHATTAN['CMPLNT_FR_DT'] <= '2016-12-31')
+df_MANHATTAN2016 = df_MANHATTAN.loc[mask9]
+
+df_BROOKLYN2019 = df_BROOKLYN.loc[df_BROOKLYN.CMPLNT_FR_DT >= '2019-01-01']
+mask16 = (df_BROOKLYN['CMPLNT_FR_DT'] > '2017-12-31') & (df_BROOKLYN['CMPLNT_FR_DT'] <= '2018-12-31')
+df_BROOKLYN2018 = df_BROOKLYN.loc[mask16]
+
+mask17 = (df_BROOKLYN['CMPLNT_FR_DT'] > '2016-12-31') & (df_BROOKLYN['CMPLNT_FR_DT'] <= '2017-12-31')
+df_BROOKLYN2017 = df_BROOKLYN.loc[mask17]
+
+mask18 = (df_BROOKLYN['CMPLNT_FR_DT'] > '2015-12-31') & (df_BROOKLYN['CMPLNT_FR_DT'] <= '2016-12-31')
+df_BROOKLYN2016 = df_BROOKLYN.loc[mask18]
+
+df_STATEN_ISLAND2019 = df_STATEN_ISLAND.loc[df_STATEN_ISLAND.CMPLNT_FR_DT >= '2019-01-01']
+mask16 = (df_STATEN_ISLAND['CMPLNT_FR_DT'] > '2017-12-31') & (df_STATEN_ISLAND['CMPLNT_FR_DT'] <= '2018-12-31')
+df_STATEN_ISLAND2018 = df_STATEN_ISLAND.loc[mask16]
+
+mask17 = (df_STATEN_ISLAND['CMPLNT_FR_DT'] > '2016-12-31') & (df_STATEN_ISLAND['CMPLNT_FR_DT'] <= '2017-12-31')
+df_STATEN_ISLAND2017 = df_STATEN_ISLAND.loc[mask17]
+
+mask18 = (df_STATEN_ISLAND['CMPLNT_FR_DT'] > '2015-12-31') & (df_STATEN_ISLAND['CMPLNT_FR_DT'] <= '2016-12-31')
+df_STATEN_ISLAND2016 = df_STATEN_ISLAND.loc[mask18]
+
+
+
+
+
+
+seccion_df = df_QUEENS2019.copy()
+
+df_agrupado_ay = seccion_df.groupby('OFNS_DESC')
+for OFNSDESC, registros in df_agrupado_ay:
+    print(OFNSDESC)
+    
+
+ofensas = pd.unique(df_QUEENS2019['OFNS_DESC'])
+cantidadOfensas = df_QUEENS2019.copy().groupby('OFNS_DESC')
+df_cantidadOfensas = pd.DataFrame(cantidadOfensas['CMPLNT_NUM'].count())
+
+df_cantidadOfensas.plot(kind='bar')#grafico de ofensas vs cantidad de ofensas
+
+
+arregloOfensas = df_cantidadOfensas['CMPLNT_NUM']
+
+
+
+genero = pd.unique(df_QUEENS2019['SUSP_SEX'])
+
 
 
 
 df_QUEENS.count()
 len(df_QUEENS)
+
+
+
