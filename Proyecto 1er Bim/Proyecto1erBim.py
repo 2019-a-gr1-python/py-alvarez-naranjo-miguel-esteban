@@ -36,12 +36,36 @@ columnas_a_usar = ['CMPLNT_NUM','ADDR_PCT_CD','BORO_NM',
 df_completo = pd.read_csv(
         path_CSV,
         usecols = columnas_a_usar,
-        parse_dates = True,
-        index_col = 'CMPLNT_NUM')
+        parse_dates = ['CMPLNT_FR_DT', 'CMPLNT_TO_DT', 'RPT_DT'],
+        )
 
 
 
 df_completo.fillna(0)
+
+df_completo = df_completo[df_completo.CMPLNT_NUM != 418784447]
+df_completo = df_completo[df_completo.CMPLNT_NUM != 160867902]
+df_completo = df_completo[df_completo.CMPLNT_NUM != 691037884]
+df_completo = df_completo[df_completo.CMPLNT_NUM != 186099981]
+df_completo = df_completo[df_completo.CMPLNT_NUM != 794492299]
+df_completo = df_completo[df_completo.CMPLNT_NUM != 813648479]
+df_completo = df_completo[df_completo.CMPLNT_NUM != 870176415]
+df_completo = df_completo[df_completo.CMPLNT_NUM != 386936950]
+df_completo = df_completo[df_completo.CMPLNT_NUM != 837889016]
+df_completo = df_completo[df_completo.CMPLNT_NUM != 291498531]
+df_completo = df_completo[df_completo.CMPLNT_NUM != 469624613]
+df_completo = df_completo[df_completo.CMPLNT_NUM != 335349746]
+df_completo = df_completo[df_completo.CMPLNT_NUM != 168683913]
+df_completo = df_completo[df_completo.CMPLNT_NUM != 361877450]
+df_completo = df_completo[df_completo.CMPLNT_NUM != 380335489]
+df_completo = df_completo[df_completo.CMPLNT_NUM != 677785742]
+
+path_guardado = 'C:/Users/MIGUELESTEBAN/Documents/GitHub/py-alvarez-naranjo-miguel-esteban/Proyecto 1er Bim/Data/NYPD_Complaint_Data_Current__Year_To_Date_.pickle'
+
+df_completo.to_pickle(path_guardado)
+
+
+
 # graficar el mapa
 NY_street_map = gpd.read_file(path_mapa)
 fig,ax = plt.subplots(figsize = (15,15))
@@ -82,15 +106,27 @@ STATEN_ISLAND = df_completo['BORO_NM'] == 'STATEN ISLAND'
 
 df_STATEN_ISLAND = df_completo[STATEN_ISLAND]
 
-BarrioDesconocido = df_completo['BORO_NM'] == ''
+# BarrioDesconocido = df_completo['BORO_NM'] == ''
 
-df_BarrioDesconocido = df_completo[BarrioDesconocido]
+# df_BarrioDesconocido = df_completo[BarrioDesconocido]
 
-
+df_completo.count()
 
 # cambiar a formato fecha
 
+
+
 df_QUEENS['CMPLNT_FR_DT'] = pd.to_datetime(df_QUEENS.CMPLNT_FR_DT)
+df_BRONX.dtypes
+
+df_QUEENS2019 = df_QUEENS.loc[df_QUEENS.CMPLNT_TO_DT >= '01/01/2019']
+mask1 = (df_QUEENS['CMPLNT_FR_DT'] > '12/31/2017') & (df_QUEENS['CMPLNT_FR_DT'] <= '12/31/2018')
+df_QUEENS2018 = df_QUEENS.loc[mask1]
+
+mask2 = (df_QUEENS['CMPLNT_FR_DT'] > '12/31/2016') & (df_QUEENS['CMPLNT_FR_DT'] <= '12/31/2017')
+df_QUEENS2017 = df_QUEENS.loc[mask2]
+
+
 
 df_QUEENS.count()
 len(df_QUEENS)
