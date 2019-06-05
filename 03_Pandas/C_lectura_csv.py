@@ -12,7 +12,7 @@ import os
 # Binary Files -> (asasadasadasasa)
 # Relational Databases
 
-path = '/Users/carlosaguirre/Documents/GitHub/py-Aguirre-Maldonado-Carlos-Arturo/03_Pandas/data/csv/artwork_data.csv'
+path = 'C:/Users/MIGUELESTEBAN/Documents/GitHub/py-alvarez-naranjo-miguel-esteban/03_Pandas/data/csv/artwork_data.csv'
 
 df = pd.read_csv(
         path,
@@ -34,7 +34,7 @@ df_completo = pd.read_csv(
         index_col = 'id'
         )
 
-path_guardado = '/Users/carlosaguirre/Documents/GitHub/py-Aguirre-Maldonado-Carlos-Arturo/03_Pandas/data/csv/artwork_data.pickle'
+path_guardado = 'C:/Users/MIGUELESTEBAN/Documents/GitHub/py-alvarez-naranjo-miguel-esteban/03_Pandas/data/csv/artwork_data.pickle'
 
 df_completo.to_pickle(path_guardado)
 
