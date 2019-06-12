@@ -49,8 +49,16 @@ writer.save()
 artistas_contados = df_completo_picke['artist'].value_counts()
 writer = pd.ExcelWriter('colores.xlsx', engine = 'xlsxwriter')
 artistas_contados.to_excel(writer, sheet_name = 'Artistas Contados')
+artistas_contados.to_excel(writer, sheet_name = 'Artistas Contados1')
+artistas_contados.to_excel(writer, sheet_name = 'Artistas Contados2')
+artistas_contados.to_excel(writer, sheet_name = 'Artistas Contados3')
+artistas_contados.to_excel(writer, sheet_name = 'Artistas Contados4')
 
 hoja_artistas = writer.sheets['Artistas Contados']
+hoja_artistas1 = writer.sheets['Artistas Contados1']
+hoja_artistas2 = writer.sheets['Artistas Contados2']
+hoja_artistas3 = writer.sheets['Artistas Contados3']
+hoja_artistas4 = writer.sheets['Artistas Contados4']
 
 rango_celdas = 'B2:B{}'.format(len(artistas_contados.index) + 1)
 
@@ -63,6 +71,20 @@ formato = {
 
 hoja_artistas.conditional_format(rango_celdas, formato)
 
+hoja_artistas1.conditional_format(rango_celdas, {'type': 'data_bar'})
+
+hoja_artistas2.conditional_format(rango_celdas, {'type': 'icon_set',
+     'icon_style': '4_red_to_black',
+     'icons': [{'criteria': '>=', 'type': 'number',     'value': 90},
+               {'criteria': '<',  'type': 'percentile', 'value': 50},
+               {'criteria': '<=', 'type': 'percent',    'value': 25}]})
+
+hoja_artistas3.conditional_format(rango_celdas, {'type': 'icon_set',
+                                       'icon_style': '3_traffic_lights',
+                                       'icons': [{'criteria': '>=', 'type': 'number',     'value': 90},
+               {'criteria': '<',  'type': 'percentile', 'value': 50},
+               {'criteria': '<=', 'type': 'percent',    'value': 25}]})
+
 writer.save()
 
 
@@ -71,16 +93,24 @@ writer.save()
 
 
 
+with sqlite3.connect('bdd_python.db') as conexion:
+    df.to_sql('Alguien', conexion)
+
+
+## with mysql.connect('mysql://user:password@ip:puerto.db') as conexion:
+##     df.to_sql('Alguien', conexion)
+    
+## with sqlite3.connect('bdd_python.db') as conexion:
+##     df.to_sql('Alguien', conexion)
 
 
 
 
 
+############################ JSON #########################3
 
-
-
-
-
+df.to_json('artistas.json')
+df.to_json('artistas_orientado_tabla.json', orient = 'table')
 
 
 
