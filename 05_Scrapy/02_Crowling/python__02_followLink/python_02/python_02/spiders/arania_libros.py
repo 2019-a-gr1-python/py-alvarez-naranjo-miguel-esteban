@@ -53,5 +53,5 @@ class AraniaCrawlOnu(CrawlSpider):
         lista_programas = response.css('article.product_pod > h3 > a::attr(title)').extract()
 
         for agencia in lista_programas:
-            with open('libros_fantasy_mistery.txt', 'a+') as archivo:
+            with open('onu_agencias.txt', 'a+') as archivo:
                 archivo.write(agencia + '\n')
