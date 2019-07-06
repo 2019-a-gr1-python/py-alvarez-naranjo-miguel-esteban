@@ -1,0 +1,89 @@
+contenedor = response.css('div.prouct-tile-inner')
+titulo = contenedor.css('a.name::text')
+contenedor.css('div.detail > a.image')
+contenedor.css('div.detail > a.image')
+fetch('https://www.fybeca.com/FybecaWeb/pages/search-results.jsf?cat=238&s=0&pp=25')
+contenedor.css('div.detail > a.image')
+fetch('https://www.fybeca.com/FybecaWeb/pages/search-results.jsf?cat=238&s=0&pp=25')
+contenedor.css('div.detail > a.image')
+contenedor.css('div.detail > a.image')
+response.xpath('//div[contains(@class,"detail")]/a[contains(@class,"image")]/img[contains(@id,"gImg")]/@src')
+url = response.xpath('//div[contains(@class,"detail")]/a[contains(@class,"image")]/img[contains(@id,"gImg")]/@src').extract_first()
+url = response.xpath('//div[contains(@class,"detail")]/a[contains(@class,"image")]/img[contains(@id,"gImg")]/@src')
+titulo = contenedor.css('a.name::text')
+class ProductoFybeca(scrapy.Item):
+    titulo = scrapy.Field()
+    imagen = scrapy.Field()
+primer_producto = ProductoFybeca()
+primer_producto['titulo'] = titulo.extract_first()
+primer_producto['imagen'] = url.extract_first()
+primer_producto
+titulo
+titulo = contenedor.css('a.name::text')
+primer_producto
+contenedor.css('a.name::text')
+contenedor = response.css('div.product-tile-inner')
+titulo = contenedor.css('a.name::text')
+primer_producto
+class ProductoFybeca(scrapy.Item):
+    titulo = scrapy.Field()
+    imagen = scrapy.Field()
+primer_producto
+primer_producto = ProductoFybeca()
+primer_producto
+primer_producto['imagen'] = url.extract_first()
+primer_producto['titulo'] = titulo.extract_first()
+primer_producto
+def transformar_url_imagen(text):
+    url='https://www.fybeca.com'
+    cadena_a_reemplazar = '../..'
+    return text.replace(cadena_a_reemplazar, url)
+class ProductoFybeca(scrapy.Item):
+    titulo = scrapy.Field()
+    imagen = scrapy.Field()
+from scrapy.loader.processors import MapCompose
+class ProductoFybeca(scrapy.Item):
+    titulo = scrapy.Field(
+        input_processor = MapCompose
+    )
+    
+
+
+    imagen = scrapy.Field()
+class ProductoFybeca(scrapy.Item):
+    imagen = scrapy.Field(
+        input_processor = MapCompose(transformar_url_imagen)
+    )
+    
+    titulo = scrapy.Field()
+primer_producto
+primer_producto = ProductoFybeca()
+primer_producto['imagen'] = url.extract_first()
+primer_producto['titulo'] = titulo.extract_first()
+primer_producto
+primer_producto = ProductoFybeca
+primer_producto
+clear
+class ProductoFybeca2(scrapy.Item):
+    imagen = scrapy.Field(
+        input_processor = MapCompose(transformar_url_imagen)
+    )
+    
+    titulo = scrapy.Field()
+primer_producto = PoductoFybeca2()
+class ProductoFybeca2(scrapy.Item):
+    imagen = scrapy.Field(
+        input_processor = MapCompose(transformar_url_imagen)
+    )
+    
+    titulo = scrapy.Field()
+producto2 = ProductoFybeca2()
+producto2['imagen'] = url.extract_first()
+producto2['titulo'] = titulo.extract_first()
+producto2
+from scrapy.loader import ItemLoader
+il = ItemLoader(item=ProductoFybeca2())
+il.add_value('imagen', url.extract_first())
+il.add_value('titulo', titulo.extract_first())
+il.load_item()
+%history -f claseItemLoader.txt
