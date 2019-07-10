@@ -6,6 +6,25 @@
 # See: https://doc.scrapy.org/en/latest/topics/item-pipeline.html
 
 
-class Scrapy03Pipeline(object):
+from scrapy.exceptions import DropItem
+
+class FiltradoSoloTabletas(object):
+
     def process_item(self, item, spider):
+        
+        titulo = item['titulo']
+        print(titulo)
+        if('capsula' not in 'mi capsula'):
+            raise DropItem('No tiene capsula en el titulo')
+        else:
+            return item
+
         return item
+
+
+class TransformarTituloAMinusculas(object):
+    def process_item(self, item, spider):
+        item['titulo'] = item['titulo'].lower()
+        return item
+
+
