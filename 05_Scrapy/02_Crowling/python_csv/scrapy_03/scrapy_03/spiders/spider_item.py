@@ -3,12 +3,25 @@ from scrapy_03.spiders.items import ProductoFybeca
 from scrapy.loader import ItemLoader
 from scrapy.loader.processors import TakeFirst
 
+
+# 1) Generar las URLS
+# 2) Anadir el precio (clase, input, output)
+# 3) Transformar el precio a numero (float)
+# 4) Exportar a CSV
+# 5) Anadir un pipeline para seleccionar los productos mayores al precio promedio
+
 class AraniaProductosFybeca(scrapy.Spider):
     name = 'arania_fybeca'
 
     def start_requests(self):
         urls = [
-        'https://www.fybeca.com/FybecaWeb/pages/search-results.jsf?cat=238&s=0&pp=25'
+        'https://www.fybeca.com/FybecaWeb/pages/search-results.jsf?cat=238&s=0&pp=25',
+        'https://www.fybeca.com/FybecaWeb/pages/search-results.jsf?cat=238&s=25&pp=25',
+        'https://www.fybeca.com/FybecaWeb/pages/search-results.jsf?cat=238&s=50&pp=25',
+        'https://www.fybeca.com/FybecaWeb/pages/search-results.jsf?cat=238&s=75&pp=25',
+        'https://www.fybeca.com/FybecaWeb/pages/search-results.jsf?cat=238&s=100&pp=25',
+        'https://www.fybeca.com/FybecaWeb/pages/search-results.jsf?cat=238&s=125&pp=25',
+        'https://www.fybeca.com/FybecaWeb/pages/search-results.jsf?cat=238&s=150&pp=25'
         ]
 
         for url in urls:
@@ -38,7 +51,14 @@ class AraniaProductosFybeca(scrapy.Spider):
                     'div[contains(@class,"detail")]/a[contains(@class,"image")]/img[contains(@id,"gImg")]/@src'
                 )
 
+                producto_loader.add_css(
+                    'precio',
+                    'div.price::attr(data-bind)'
+                )
+
                 #producto_imprimir = producto_loader.load_item()
                 #print(producto_imprimir)
                 yield producto_loader.load_item()
+
+
 
