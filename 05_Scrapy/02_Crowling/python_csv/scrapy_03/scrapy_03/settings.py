@@ -70,10 +70,11 @@ ROBOTSTXT_OBEY = True
 ITEM_PIPELINES = {
     'scrapy_03.pipelines.TransformarTituloAMinusculas': 200,
     'scrapy_03.pipelines.FiltradoSoloTabletas': 300,
+    'scrapy_03.pipelines.FiltrarPreciosSuperiores':400
 }
 
-FEED_FORMAT = 'json'
-FEED_URI = 'tmp/productos-fybeca.json'
+FEED_FORMAT = 'csv'
+FEED_URI = 'tmp/productos-fybeca.csv'
 
 
 # Enable and configure the AutoThrottle extension (disabled by default)

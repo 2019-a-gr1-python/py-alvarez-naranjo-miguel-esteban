@@ -8,9 +8,11 @@ def transformar_url_imagen(texto):
     cadena_a_reemplazar = '../..'   
     return texto.replace(cadena_a_reemplazar,url)
 
-def FiltrarPrecio(texto):
-    texto = re.findall(r"\d+\.\d+", texto)
-    return texto
+def FiltrarPrecio(precio):
+    precio = re.findall(r"\d+\.\d+", precio)    
+    return float(str(precio[0]))
+    
+
 
 class ProductoFybeca(scrapy.Item):
     imagen = scrapy.Field(

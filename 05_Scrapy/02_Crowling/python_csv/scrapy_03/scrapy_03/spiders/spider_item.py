@@ -14,15 +14,9 @@ class AraniaProductosFybeca(scrapy.Spider):
     name = 'arania_fybeca'
 
     def start_requests(self):
-        urls = [
-        'https://www.fybeca.com/FybecaWeb/pages/search-results.jsf?cat=238&s=0&pp=25',
-        'https://www.fybeca.com/FybecaWeb/pages/search-results.jsf?cat=238&s=25&pp=25',
-        'https://www.fybeca.com/FybecaWeb/pages/search-results.jsf?cat=238&s=50&pp=25',
-        'https://www.fybeca.com/FybecaWeb/pages/search-results.jsf?cat=238&s=75&pp=25',
-        'https://www.fybeca.com/FybecaWeb/pages/search-results.jsf?cat=238&s=100&pp=25',
-        'https://www.fybeca.com/FybecaWeb/pages/search-results.jsf?cat=238&s=125&pp=25',
-        'https://www.fybeca.com/FybecaWeb/pages/search-results.jsf?cat=238&s=150&pp=25'
-        ]
+        urls = []
+        for i in range(0, 151, 25):
+            urls.append(f'https://www.fybeca.com/FybecaWeb/pages/search-results.jsf?s={i}&pp=25&cat=238&ot=0')
 
         for url in urls:
             yield scrapy.Request(url=url)
@@ -59,6 +53,8 @@ class AraniaProductosFybeca(scrapy.Spider):
                 #producto_imprimir = producto_loader.load_item()
                 #print(producto_imprimir)
                 yield producto_loader.load_item()
+                
+
 
 
 

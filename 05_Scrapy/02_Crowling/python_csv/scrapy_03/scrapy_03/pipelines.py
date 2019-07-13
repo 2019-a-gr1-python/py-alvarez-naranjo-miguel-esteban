@@ -7,6 +7,7 @@
 
 
 from scrapy.exceptions import DropItem
+import pandas as pd
 
 class FiltradoSoloTabletas(object):
 
@@ -28,3 +29,11 @@ class TransformarTituloAMinusculas(object):
         return item
 
 
+class FiltrarPreciosSuperiores(object):
+    
+   def process_item(self,item,spider):
+        promedio = 12.339
+        if(item['precio']>promedio):
+            return item
+        else:
+            raise DropItem('No es mayor al promedio')
