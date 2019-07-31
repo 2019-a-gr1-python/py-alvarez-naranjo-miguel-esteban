@@ -12,12 +12,12 @@ class AraniaFiscaliaGeneralEstadoEC(scrapy.Spider):
             yield scrapy.Request(url = url, callback=self.parse)
     
     def parse(self, response):
-        tablas = response.xpath('//*[@class="general"]//tbody')
+        tablas = response.xpath('//*[@class="general"]//tbody').extract()
         for tabla in tablas:
             yield {
-                tablas.xpath('tr//td//text()')[0]:tablas.xpath('tr//td//text()')[1],
-                tablas.xpath('tr//td//text()')[2]:tablas.xpath('tr//td//text()')[3],
-                tablas.xpath('tr//td//text()')[4]:tablas.xpath('tr//td//text()')[5],
-                tablas.xpath('tr//td//text()')[11]:tablas.xpath('tr//td//text()')[12],
+                tabla.xpath('tr//td//text()')[0].extract_first():tabla.xpath('tr//td//text()')[1]extract_first(),
+                tabla.xpath('tr//td//text()')[2]extract_first():tabla.xpath('tr//td//text()')[3]extract_first(),
+                tabla.xpath('tr//td//text()')[4]extract_first():tabla.xpath('tr//td//text()')[5]extract_first(),
+                tabla.xpath('tr//td//text()')[11]extract_first():tabla.xpath('tr//td//text()')[12]extract_first(),
 
             }
