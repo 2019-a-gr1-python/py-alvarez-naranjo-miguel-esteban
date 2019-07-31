@@ -12,12 +12,17 @@ class AraniaFiscaliaGeneralEstadoEC(scrapy.Spider):
             yield scrapy.Request(url = url, callback=self.parse)
     
     def parse(self, response):
-        tablas = response.xpath('//*[@class="general"]//tbody').extract()
-        for tabla in tablas:
-            yield {
-                tabla.xpath('tr//td//text()')[0].extract_first():tabla.xpath('tr//td//text()')[1].extract_first(),
-                tabla.xpath('tr//td//text()')[2].extract_first():tabla.xpath('tr//td//text()')[3].extract_first(),
-                tabla.xpath('tr//td//text()')[4].extract_first():tabla.xpath('tr//td//text()')[5].extract_first(),
-                tabla.xpath('tr//td//text()')[11].extract_first():tabla.xpath('tr//td//text()')[12].extract_first(),
+        
+        for tabla in response.xpath('//*[@class="general"]//tbody'):
+            existe_tabla = len(tabla.xpath('tr//td//text()').extract())
+            print(existe_tabla)
+            if(existe_tabla > 13):
+                yield {
+                    tabla.xpath('tr//td//text()')[0].extract():tabla.xpath('tr//td//text()')[1].extract(),
+                    tabla.xpath('tr//td//text()')[2].extract():tabla.xpath('tr//td//text()')[3].extract(),
+                    tabla.xpath('tr//td//text()')[4].extract():tabla.xpath('tr//td//text()')[5].extract(),
+                    tabla.xpath('tr//td//text()')[11].extract():tabla.xpath('tr//td//text()')[12].extract(),
 
-            }
+                }
+            else:
+                print('la tabla no contiene informacion')
