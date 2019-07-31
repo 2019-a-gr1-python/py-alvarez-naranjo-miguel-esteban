@@ -15,9 +15,9 @@ class AraniaFiscaliaGeneralEstadoEC(scrapy.Spider):
         tablas = response.xpath('//*[@class="general"]//tbody').extract()
         for tabla in tablas:
             yield {
-                tabla.xpath('tr//td//text()')[0].extract_first():tabla.xpath('tr//td//text()')[1]extract_first(),
-                tabla.xpath('tr//td//text()')[2]extract_first():tabla.xpath('tr//td//text()')[3]extract_first(),
-                tabla.xpath('tr//td//text()')[4]extract_first():tabla.xpath('tr//td//text()')[5]extract_first(),
-                tabla.xpath('tr//td//text()')[11]extract_first():tabla.xpath('tr//td//text()')[12]extract_first(),
+                tabla.xpath('tr//td//text()')[0].extract_first():tabla.xpath('tr//td//text()')[1].extract_first(),
+                tabla.xpath('tr//td//text()')[2].extract_first():tabla.xpath('tr//td//text()')[3].extract_first(),
+                tabla.xpath('tr//td//text()')[4].extract_first():tabla.xpath('tr//td//text()')[5].extract_first(),
+                tabla.xpath('tr//td//text()')[11].extract_first():tabla.xpath('tr//td//text()')[12].extract_first(),
 
             }
