@@ -21,6 +21,10 @@ NEWSPIDER_MODULE = 'delitosEC.spiders'
 # Obey robots.txt rules
 ROBOTSTXT_OBEY = True
 
+
+FEED_FORMAT = 'json'
+FEED_URI = 'archivos/delitosEC.json'
+
 # Configure maximum concurrent requests performed by Scrapy (default: 16)
 #CONCURRENT_REQUESTS = 32
 
