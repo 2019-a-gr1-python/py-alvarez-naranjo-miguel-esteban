@@ -1,4 +1,5 @@
 import scrapy
+import pandas as pd
 from scrapy_03.spiders.items import ProductoFybeca
 from scrapy.loader import ItemLoader
 from scrapy.loader.processors import TakeFirst

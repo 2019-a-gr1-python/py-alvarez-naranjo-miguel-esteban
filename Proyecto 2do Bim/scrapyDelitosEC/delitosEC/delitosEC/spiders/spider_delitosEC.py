@@ -1,7 +1,8 @@
 import scrapy
+from scrapy.spider import CrawlSpider 
 import re
 
-class AraniaFiscaliaGeneralEstadoEC(scrapy.Spider):
+class AraniaFiscaliaGeneralEstadoEC(CrawlSpider):
     name = 'arania_delitosEC'
     
     def start_requests(self):
