@@ -31,3 +31,4 @@ class AraniaFiscaliaGeneralEstadoEC(CrawlSpider):
                 }
             else:
                 print('la tabla no contiene informacion')
+                
